@@ -70,10 +70,6 @@ h2 {
 	display: flex;
 	justify-content: space-between;
 	gap: 20px;
-	/* remove next three lines and put them to .main{} */
-	/* background-image: url('images/bg.png');
-	background-size: cover;
-	background-repeat: no-repeat; */
 }
 .left-column {
 	max-width: 390px;
@@ -97,13 +93,11 @@ h2 {
 .mid-column {
 	display: flex;
 	flex-direction: column;
-	/* align-items: center; */
 	justify-content: center;
 	flex: auto;
 	position: relative;
 	padding: 10px 38px 10px;
 	max-width: 650px;
-	/* make min-width 375px  */
 	min-width: 375px;
 	min-height: 550px
 }
@@ -115,9 +109,6 @@ h2 {
 }
 .info__inner {
 	max-width: fit-content;
-	/* margin: 0px auto; */
-	/* remove next line (padding: 0px 30px;) */
-	/* padding: 0px 30px; */
 }
 .info__text {
 	display: block;
@@ -163,8 +154,7 @@ h2 {
 }
 .right-column {
 	max-width: 400px;
-	min-width: 203px;
-	/* put  height: 435px */
+	min-width: 232px;
 	height: 435px; 
   overflow-y: auto;
 }

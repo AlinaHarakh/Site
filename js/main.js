@@ -77,34 +77,45 @@ document.addEventListener("DOMContentLoaded", function () {
 		for (const p of ps) {
 			p.style.display = 'none';
 		}
-		// Go to PNG
+
 		if (!imagesCache[id]) {
-			for (let i = 1; i <= 2; i++) {
-				const format = i === 1 ? 'jpg' : 'png';
-				const img = new Image();
+			const img = new Image();
+			img.src = `images/${id}.png`;
+			img.classList.add('img-content');
+			img.style.display = 'none';
 
-				img.src = `images/${id}.${format}`;
-				img.classList.add('img-content');
-				img.style.display = 'none';
+			img.onload = () => {
+				img.style.display = 'block';
+				imagesCache[id] = img;
+				const ps = selectedItem.querySelectorAll('p');
+				for (const p of ps) {
+					p.style.display = 'none';
+				}
+			};
 
-				img.onload = () => {
-					img.style.display = 'block';
-					imagesCache[id] = img;
+			img.onerror = () => {
+				const imgJPG = new Image();
+				imgJPG.src = `images/${id}.jpg`;
+				imgJPG.classList.add('img-content');
+				imgJPG.style.display = 'none';
+
+				imgJPG.onload = () => {
+					imgJPG.style.display = 'block';
+					imagesCache[id] = imgJPG;
 					const ps = selectedItem.querySelectorAll('p');
 					for (const p of ps) {
 						p.style.display = 'none';
 					}
 				};
-				img.onerror = () => {
-					errors++;
-					if (errors === 2) {
-						for (const p of ps) {
-							p.style.display = 'block';
-						}
+
+				imgJPG.onerror = () => {
+					for (const p of ps) {
+						p.style.display = 'block';
 					}
 				}
-				selectedItem.appendChild(img);
+				selectedItem.appendChild(imgJPG);
 			}
+			selectedItem.appendChild(img);
 		} else {
 			selectedItem.appendChild(imagesCache[id]);
 		}

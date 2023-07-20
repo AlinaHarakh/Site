@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+	<meta name="keywords"
+		content="Maxime, Aphorismus, Sprichwort, Ironie, pfiffig, Weisheit, Philosophie, Lebenspraxis, maxim, aphorism, proverb, motivation, inspiration, philosophy" />
+	<meta name="description" content="Kreative Spr&uuml;che und ironischer Tiefsinn, Inspiration, Poesie" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Kreative Aphorismen und Lebensweisheiten</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Reggae+One&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="wrapper">
+
+		<header class="header">
+			<div class="header__image">
+				<img class="header__image-img" src="images/top.png" alt="top image">
+			</div>
+		</header>
+
+		<main class="main">
+			<div class="content">
+				<div class="container">
+					<div class="content__inner">
+						<div class="content__column left-column tags">
+							<h2 class="tags__title">
+								Stichwörter
+							</h2>
+							<div class="tags__buttons">
+								<button class="tag-btn" id="anders">anders</button>
+								<button class="tag-btn" id="anfang">Anfang</button>
+								<button class="tag-btn" id="antwort">Antwort</button>
+								<button class="tag-btn" id="arbeit">Arbeit</button>
+								<button class="tag-btn" id="augen">Augen</button>
+								<button class="tag-btn" id="besessen">besessen</button>
+								<button class="tag-btn" id="besser">besser</button>
+								<button class="tag-btn" id="buch">Buch</button>
+								<button class="tag-btn" id="bucher">Bücher</button>
+								<button class="tag-btn" id="denken">Denken</button>
+								<button class="tag-btn" id="einfach">einfach</button>
+								<button class="tag-btn" id="ende">Ende</button>
+								<button class="tag-btn" id="essen">essen</button>
+								<button class="tag-btn" id="fehler">Fehler</button>
+								<button class="tag-btn" id="finden">finden</button>
+								<button class="tag-btn" id="frage">Frage</button>
+								<button class="tag-btn" id="fragen">fragen</button>
+								<button class="tag-btn" id="fressen">fressen</button>
+								<button class="tag-btn" id="gedanke">Gedanke</button>
+								<button class="tag-btn" id="geist">Geist</button>
+								<button class="tag-btn" id="geld">Geld</button>
+								<button class="tag-btn" id="geschichte">Geschichte</button>
+								<button class="tag-btn" id="gesicht">Gesicht</button>
+								<button class="tag-btn" id="gewissen">Gewissen</button>
+								<button class="tag-btn" id="glauben">glauben</button>
+								<button class="tag-btn" id="gluck">Glück</button>
+								<button class="tag-btn" id="glucklich">glücklich</button>
+								<button class="tag-btn" id="gott">Gott</button>
+								<button class="tag-btn" id="hoffnung">Hoffnung</button>
+								<button class="tag-btn" id="idee">Idee</button>
+								<button class="tag-btn" id="klar">klar</button>
+								<button class="tag-btn" id="konnen">können</button>
+								<button class="tag-btn" id="kopf">Kopf</button>
+								<button class="tag-btn" id="korper">Körper</button>
+								<button class="tag-btn" id="kurz">kurz</button>
+								<button class="tag-btn" id="lachen">lachen</button>
+								<button class="tag-btn" id="leben">Leben</button>
+								<button class="tag-btn" id="lernen">lernen</button>
+								<button class="tag-btn" id="leute">Leute</button>
+								<button class="tag-btn" id="liebe">Liebe</button>
+								<button class="tag-btn" id="lieber">lieber</button>
+								<button class="tag-btn" id="lust">Lust</button>
+								<button class="tag-btn" id="mann">Mann</button>
+								<button class="tag-btn" id="mensch">Mensch</button>
+								<button class="tag-btn" id="morgen">Morgen</button>
+								<button class="tag-btn" id="mussen">müssen</button>
+								<button class="tag-btn" id="sagen">sagen</button>
+								<button class="tag-btn" id="schreiben">schreiben</button>
+								<button class="tag-btn" id="schweigen">schweigen</button>
+								<button class="tag-btn" id="seele">Seele</button>
+								<button class="tag-btn" id="selbst">selbst</button>
+								<button class="tag-btn" id="sinn">Sinn</button>
+								<button class="tag-btn" id="spiegel">Spiegel</button>
+								<button class="tag-btn" id="sprache">Sprache</button>
+								<button class="tag-btn" id="sprechen">sprechen</button>
+								<button class="tag-btn" id="sterben">sterben</button>
+								<button class="tag-btn" id="teufel">Teufel</button>
+								<button class="tag-btn" id="tod">Tod</button>
+								<button class="tag-btn" id="traum">Traum</button>
+								<button class="tag-btn" id="vergangenheit">Vergangenheit</button>
+								<button class="tag-btn" id="vergessen">vergessen</button>
+								<button class="tag-btn" id="verstand">Verstand</button>
+								<button class="tag-btn" id="verstehen">verstehen</button>
+								<button class="tag-btn" id="wahr">wahr</button>
+								<button class="tag-btn" id="wahrheit">Wahrheit</button>
+								<button class="tag-btn" id="wasser">Wasser</button>
+								<button class="tag-btn" id="welt">Welt</button>
+								<button class="tag-btn" id="wirklich">wirklich</button>
+								<button class="tag-btn" id="wissen">Wissen</button>
+								<button class="tag-btn" id="wollen">wollen</button>
+								<button class="tag-btn" id="wort">Wort</button>
+								<button class="tag-btn" id="wunder">Wunder</button>
+								<button class="tag-btn" id="zeit">Zeit</button>
+								<button class="tag-btn" id="ziel">Ziel</button>
+								<button class="tag-btn" id="zukunft">Zukunft</button>
+							</div>
+						</div>
+
+						<div class="content__column mid-column info">
+							<div class="info__inner">
+								<div class="info__text">
+									<!-- Chose a category or a tag -->
+								</div>
+								<div class="info__buttons">
+									<button class="info__prev"></button>
+									<button class="info__next"></button>
+								</div>
+							</div>
+						</div>
+
+						<div class="content__column right-column categories">
+							<h2 class="categories__title">
+								Nester
+							</h2>
+							<div class="categories__buttons">
+								<button class="category-btn" id="absurd">Aberwitziges</button>
+								<button class="category-btn" id="allg">All-Gemeines</button>
+								<button class="category-btn" id="aufgespie">Aufgespießt</button>
+								<button class="category-btn" id="kalau">Aus Kalau herüber</button>
+								<button class="category-btn" id="intui">Bloße Intuition</button>
+								<button class="category-btn" id="denk">Denkste?</button>
+								<button class="category-btn" id="erkenn">Erkenntnisse erkennen</button>
+								<button class="category-btn" id="mensch">Es menschelt</button>
+								<button class="category-btn" id="fem">Etwas Genderei</button>
+								<button class="category-btn" id="mem">Fund oder Schwund!</button>
+								<button class="category-btn" id="flug">Geflügelt</button>
+								<button class="category-btn" id="idi">Idio(ma)tismen</button>
+								<button class="category-btn" id="ironismen">Ironismen</button>
+								<button class="category-btn" id="klassisch">Klassisches</button>
+								<button class="category-btn" id="komm">Kommunikativ</button>
+								<button class="category-btn" id="leben">Leben und leben lassen</button>
+								<button class="category-btn" id="spruch">Mach keine Sprüche?</button>
+								<button class="category-btn" id="moral">Moralisches</button>
+								<button class="category-btn" id="mod">Mutanten</button>
+								<button class="category-btn" id="spiel">Nur Spielereien?</button>
+								<button class="category-btn" id="para">Paradox?</button>
+								<button class="category-btn" id="philo">Philosophey</button>
+								<button class="category-btn" id="psycho">Psycho</button>
+								<button class="category-btn" id="rat">Radschläge?</button>
+								<button class="category-btn" id="schreib">Schreibereien</button>
+								<button class="category-btn" id="schwarz">Schwarzweisheiten</button>
+								<button class="category-btn" id="simpel">Simplizitäten</button>
+								<button class="category-btn" id="sophis">Sophismen</button>
+								<button class="category-btn" id="sprach">Sprachschatz</button>
+								<button class="category-btn" id="reli">Überirdisch</button>
+								<button class="category-btn" id="person">Und du?</button>
+								<button class="category-btn" id="irr">Verwirrtes</button>
+								<button class="category-btn" id="wtrue">Wahrheiten</button>
+								<button class="category-btn" id="weise">Weises – Wer weiß es</button>
+								<button class="category-btn" id="bild">Weltbild</button>
+								<button class="category-btn" id="wiss">Wissbegierig</button>
+								<button class="category-btn" id="wspiel">Wortspielereien?</button>
+								<button class="category-btn" id="ww">www – Wer Wissen will</button>
+								<button class="category-btn" id="zyn">Zynismen?</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<ul id="items"></ul>
+
+
+			<footer class="footer">
+				<div class="container">
+					<p class="footer__inner">
+						&copy; Heringer All rights reserved. Images by Heringer&nbsp;&nbsp;&nbsp|&nbsp;&nbsp;&nbsp</a>
+						<a href="impressum.html">Impressum & Support</a>
+					</p>
+				</div>
+			</footer>
+	</div>
+	<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+	<script src="js/main.js"></script>
+</body>
+
+</html>

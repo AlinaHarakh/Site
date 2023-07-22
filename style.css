@@ -99,7 +99,6 @@ h2 {
 	position: relative;
 	padding: 10px 38px 10px;
 	max-width: 650px;
-	/* min-width: 600px; */
 	min-height: 550px
 }
 .info-item {
@@ -176,6 +175,7 @@ h2 {
 }
 .img-content {
 	max-width: 100%;
+	margin: 0px auto;
 	max-height: 500px;
 	object-fit: contain;
 	user-select: none;
@@ -195,8 +195,11 @@ h2 {
 	color: #585454;
 	font-size: 14px;
 }
-
-
+@media(max-width: 1200px) {
+	.left-column {
+    max-width: 335px;
+	}
+}
 @media(max-width: 1200px) {
 	.content__inner {
 		gap: 8px;
@@ -207,14 +210,11 @@ h2 {
 	.info__inner {
 		max-width: 100%;
 	}
-	.img-content {
-		margin: 0 auto;
-	}
+	
 	.right-column { 
 		height: 597px;
 	}
 }
-
 @media(max-width: 1100px) {
 	.header__image-img {
 		height: 150px;
@@ -232,6 +232,9 @@ h2 {
 	}
 	.mid-column {
 		max-width: calc(100% - 280px);
+	}
+	.img-content {
+		max-height: 560px;
 	}
 	.right-column {
 		margin-left: auto;

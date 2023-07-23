@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
 	const buttons = document.querySelectorAll(".category-btn, .tag-btn");
 	const infoText = document.querySelector(".info__text");
@@ -13,9 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
 	buttons.forEach(function (button) {
 		button.addEventListener("click", function () {
 			infoText.innerHTML = "";
+
 			if (items.length > 0) {
 				currentIndex = 0;
-				appendItem();
 				midColumn.style.display = "flex";
 				midColumn.scrollIntoView({ behavior: 'smooth' });
 			}
@@ -218,3 +219,4 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 })();
 
+xhr.open('GET', './texts_fin.xlsx?nocache=' + new Date().getTime(), true);

@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
 	const buttons = document.querySelectorAll(".category-btn, .tag-btn");
 	const infoText = document.querySelector(".info__text");
@@ -168,8 +167,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		const localStorageOrder = localStorage.getItem('itemOrder');
 		if (!localStorageOrder) {
 			const itemOrder = Array.from(items.children).map(item => item.id);
-			// Enter category randomly
-			// itemOrder.sort(() => Math.random() - 0.5);
 			localStorage.setItem('itemOrder', JSON.stringify(itemOrder));
 		}
 
@@ -218,5 +215,3 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	}
 })();
-
-xhr.open('GET', './texts_fin.xlsx?nocache=' + new Date().getTime(), true);

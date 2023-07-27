@@ -8,18 +8,14 @@ document.addEventListener("DOMContentLoaded", function () {
 	let items = [];
 	let currentFilter = '';
 
-	midColumn.style.display = "none";
 
 	buttons.forEach(function (button) {
 		button.addEventListener("click", function () {
 			infoText.innerHTML = "";
 
 			if (items.length > 0) {
-				currentIndex = 0;
-				midColumn.style.display = "flex";
 				midColumn.scrollIntoView({ behavior: 'smooth' });
 			}
-			// Move in category
 			if (button.classList.contains('category-btn')) {
 				currentFilter = 'category';
 			} else {
@@ -35,15 +31,14 @@ document.addEventListener("DOMContentLoaded", function () {
 					return items.find(item => item.getAttribute('id') === id);
 				});
 				items = orderedItems.filter(item => item !== undefined);
-			} else {
-				// items.sort(() => Math.random() - 0.5);
 			}
+
 			infoText.innerHTML = "";
 			let buttonsDisplay = items.length > 1 ? 'block' : 'none';
-			prevButton.style.display = buttonsDisplay
+			prevButton.style.display = buttonsDisplay;
 			nextButton.style.display = buttonsDisplay;
 			if (items.length > 0) {
-				currentIndex = 0;
+				currentIndex = Math.floor(Math.random() * items.length);
 				appendItem();
 				midColumn.style.display = "flex";
 			}

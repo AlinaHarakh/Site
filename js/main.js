@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			prevButton.style.display = buttonsDisplay;
 			nextButton.style.display = buttonsDisplay;
 			if (items.length > 0) {
-				currentIndex = Math.floor(Math.random() * items.length);
+				currentFilter === 'category' ? currentIndex = Math.floor(Math.random() * items.length) : currentIndex = 0
 				appendItem();
 				midColumn.style.display = "flex";
 			}

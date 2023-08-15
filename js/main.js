@@ -8,12 +8,14 @@ document.addEventListener("DOMContentLoaded", function () {
 	let items = [];
 	let currentFilter = '';
 
+	midColumn.style.display = "none";
 
 	buttons.forEach(function (button) {
 		button.addEventListener("click", function () {
 			infoText.innerHTML = "";
 
 			if (items.length > 0) {
+				midColumn.style.display = "flex";
 				midColumn.scrollIntoView({ behavior: 'smooth' });
 			}
 			if (button.classList.contains('category-btn')) {
@@ -24,14 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			const clickedButtonId = button.id;
 			const dataKey = button.classList.contains('category-btn') ? 'category' : 'tag';
 			items = Array.from(document.querySelectorAll(`[data-${dataKey}="${clickedButtonId}"]`));
-
-			const localStorageOrder = localStorage.getItem('itemOrder');
-			if (localStorageOrder) {
-				const orderedItems = JSON.parse(localStorageOrder).map(id => {
-					return items.find(item => item.getAttribute('id') === id);
-				});
-				items = orderedItems.filter(item => item !== undefined);
-			}
 
 			infoText.innerHTML = "";
 			let buttonsDisplay = items.length > 1 ? 'block' : 'none';
@@ -159,11 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			li.innerHTML = content;
 			items.appendChild(li);
 		});
-		const localStorageOrder = localStorage.getItem('itemOrder');
-		if (!localStorageOrder) {
-			const itemOrder = Array.from(items.children).map(item => item.id);
-			localStorage.setItem('itemOrder', JSON.stringify(itemOrder));
-		}
+
 
 		return fetchTags();
 	}).then(tags => {

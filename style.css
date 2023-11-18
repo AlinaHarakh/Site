@@ -45,11 +45,30 @@ h2 {
 .header {
 	background-color: #0026ff;
 }
-.header__image-img {
-	width: 100%;
-	max-width: 100%;
-	object-fit: contain;
-	height: 200px;
+.header__inner {
+	height: 205px;
+	background-size: contain; 
+	background-repeat: no-repeat; 
+	background-position: center center;
+	display: flex;
+	justify-content: flex-end;
+}
+.header__link {
+	font-family: 'Poppins', sans-serif;
+	font-weight: 700;
+	margin-top: 25px;
+	text-transform: uppercase;
+	color: #0026ff;
+	background-color: yellow;
+	padding: 10px 20px;
+	border-radius: 10px;
+	display: block;
+	height: 42px;
+	transition: all .5s;
+}
+.header__link:hover {
+	background-color: #0026ff;
+	color: yellow;
 }
 #items	{
 	display: none;

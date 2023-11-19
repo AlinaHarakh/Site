@@ -1,9 +1,12 @@
+let lecolumn = null;
+
 document.addEventListener("DOMContentLoaded", function () {
 	const buttons = document.querySelectorAll(".category-btn, .tag-btn");
 	const infoText = document.querySelector(".info__text");
 	const midColumn = document.querySelector(".mid-column");
 	const prevButton = document.querySelector(".info__prev");
 	const nextButton = document.querySelector(".info__next");
+	lecolumn = document.querySelector(".content__column.left-column.tags");
 	let currentIndex = 0;
 	let items = [];
 	let currentFilter = '';
@@ -14,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		button.addEventListener("click", function () {
 			infoText.innerHTML = "";
 
-			if (items.length > 0) {
+			if (items.length >= 0) {
 				midColumn.style.display = "flex";
 				midColumn.scrollIntoView({ behavior: 'smooth' });
 			}
@@ -25,7 +28,20 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 			const clickedButtonId = button.id;
 			const dataKey = button.classList.contains('category-btn') ? 'category' : 'tag';
-			items = Array.from(document.querySelectorAll(`[data-${dataKey}="${clickedButtonId}"]`));
+			if (button.classList.contains('tag-btn')) {
+				items = [];
+				var aa = TAGS[clickedButtonId];
+
+				if (!aa) {
+					alert("Loading");
+					return;
+				}
+
+				for (var i = 0; i < aa.length; i++)
+					items[i] = document.getElementById(aa[i]);
+			}
+			else
+				items = Array.from(document.querySelectorAll(`[data-${dataKey}="${clickedButtonId}"]`));
 
 			infoText.innerHTML = "";
 			let buttonsDisplay = items.length > 1 ? 'block' : 'none';
@@ -62,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		appendItem();
 	});
 
-	const imagesCacheNew = {};
+	const imagesCache = {};
 
 	function appendItem() {
 		const selectedItem = items[currentIndex].cloneNode(true);
@@ -73,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			p.style.display = 'none';
 		}
 
-		if (!imagesCacheNew[id]) {
+		if (!imagesCache[id]) {
 			const img = new Image();
 			img.src = `images-new/${id}.png`;
 			img.classList.add('img-content');
@@ -81,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			img.onload = () => {
 				img.style.display = 'block';
-				imagesCacheNew[id] = img;
+				imagesCache[id] = img;
 				const ps = selectedItem.querySelectorAll('p');
 				for (const p of ps) {
 					p.style.display = 'none';
@@ -96,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 				imgJPG.onload = () => {
 					imgJPG.style.display = 'block';
-					imagesCacheNew[id] = imgJPG;
+					imagesCache[id] = imgJPG;
 					const ps = selectedItem.querySelectorAll('p');
 					for (const p of ps) {
 						p.style.display = 'none';
@@ -112,14 +128,18 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 			selectedItem.appendChild(img);
 		} else {
-			selectedItem.appendChild(imagesCacheNew[id]);
+			selectedItem.appendChild(imagesCache[id]);
 		}
 
 		infoText.appendChild(selectedItem);
 	}
 });
 
+var TAGS = {};
+
 (function () {
+	if (lecolumn)
+		lecolumn.style.opacity = 0.5;
 	function excelToJson() {
 		return new Promise((resolve, reject) => {
 			const xhr = new XMLHttpRequest();
@@ -159,6 +179,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	}).then(tags => {
 		for (const tag of tags) {
 			const ids = tag.content[0].split(', ');
+			TAGS[tag.name] = ids;
+			continue;
 			for (const id of ids) {
 				const item = document.querySelector(`[id="${id}"]`);
 				if (item) {
@@ -166,12 +188,14 @@ document.addEventListener("DOMContentLoaded", function () {
 				}
 			}
 		}
+		if (lecolumn)
+			lecolumn.style.opacity = 1;
 	});
 
 	function fetchTags() {
 		return new Promise((resolve, reject) => {
 
-			fetch('./stich_finale-new.txt')
+			fetch('./stich_finale_new.txt')
 				.then(response => response.text())
 				.then(text => {
 					const lines = text.split('\n');

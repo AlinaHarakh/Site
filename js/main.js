@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	const midColumn = document.querySelector(".mid-column");
 	const prevButton = document.querySelector(".info__prev");
 	const nextButton = document.querySelector(".info__next");
-	lecolumn = document.querySelector(".content__column.left-column");
+	lecolumn = document.querySelector(".content__column.left-column.tags");
 	let currentIndex = 0;
 	let items = [];
 	let currentFilter = '';

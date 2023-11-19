@@ -195,7 +195,7 @@ var TAGS = {};
 	function fetchTags() {
 		return new Promise((resolve, reject) => {
 
-			fetch('./stich_finale_new.txt')
+			fetch('./stich_finale-new.txt')
 				.then(response => response.text())
 				.then(text => {
 					const lines = text.split('\n');

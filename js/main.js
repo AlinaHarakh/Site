@@ -1,12 +1,9 @@
-let lecolumn = null;
-
 document.addEventListener("DOMContentLoaded", function () {
 	const buttons = document.querySelectorAll(".category-btn, .tag-btn");
 	const infoText = document.querySelector(".info__text");
 	const midColumn = document.querySelector(".mid-column");
 	const prevButton = document.querySelector(".info__prev");
 	const nextButton = document.querySelector(".info__next");
-	lecolumn = document.querySelector(".content__column.left-column.tags");
 	let currentIndex = 0;
 	let items = [];
 	let currentFilter = '';
@@ -30,15 +27,10 @@ document.addEventListener("DOMContentLoaded", function () {
 			const dataKey = button.classList.contains('category-btn') ? 'category' : 'tag';
 			if (button.classList.contains('tag-btn')) {
 				items = [];
-				var aa = TAGS[clickedButtonId];
+				let selectedTag = TAGS[clickedButtonId];
 
-				if (!aa) {
-					alert("Loading");
-					return;
-				}
-
-				for (var i = 0; i < aa.length; i++)
-					items[i] = document.getElementById(aa[i]);
+				for (let i = 0; i < selectedTag.length; i++)
+					items[i] = document.getElementById(selectedTag[i]);
 			}
 			else
 				items = Array.from(document.querySelectorAll(`[data-${dataKey}="${clickedButtonId}"]`));
@@ -135,11 +127,10 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 });
 
-var TAGS = {};
+
+let TAGS = {};
 
 (function () {
-	if (lecolumn)
-		lecolumn.style.opacity = 0.5;
 	function excelToJson() {
 		return new Promise((resolve, reject) => {
 			const xhr = new XMLHttpRequest();
@@ -188,8 +179,6 @@ var TAGS = {};
 				}
 			}
 		}
-		if (lecolumn)
-			lecolumn.style.opacity = 1;
 	});
 
 	function fetchTags() {

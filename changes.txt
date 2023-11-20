@@ -1,9 +1,0 @@
-<title>Kreative Aphorismen und Lebensweisheiten | World New</title>  //11
-
-<header class="header">
-			<div class="container">
-				<div class="header__image" style="background-image: url('./images-new/top.png');">
-					<!-- <img class="header__image-img" src="" alt="top image"> -->
-				</div>
-			</div>
-		</header>

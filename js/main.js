@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	let currentPage = window.location.href.includes("new.html") ? 2 : 1;
 	midColumn.style.display = "none";
 
-	console.log(currentPage);
 	buttons.forEach(function (button) {
 		button.addEventListener("click", function () {
 			infoText.innerHTML = "";
@@ -196,9 +195,7 @@ let TAGS = {};
 		return new Promise((resolve, reject) => {
 			fetch(textDocumentPath)
 				.then((response) => {
-					if (response.ok) {
-						console.log("stich_finale.txt loaded successfully");
-					} else {
+					if (!response.ok) {
 						console.log("Error loading stich_finale.txt:", response.status);
 					}
 					return response.text();

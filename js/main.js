@@ -7,9 +7,10 @@ document.addEventListener("DOMContentLoaded", function () {
 	let currentIndex = 0;
 	let items = [];
 	let currentFilter = '';
-
+	let currentPage = window.location.href.includes("new.html") ? 2 : 1;
 	midColumn.style.display = "none";
 
+	console.log(currentPage);
 	buttons.forEach(function (button) {
 		button.addEventListener("click", function () {
 			infoText.innerHTML = "";
@@ -29,19 +30,21 @@ document.addEventListener("DOMContentLoaded", function () {
 				items = [];
 				let selectedTag = TAGS[clickedButtonId];
 
-				for (let i = 0; i < selectedTag.length; i++)
+				for (let i = 0; i < selectedTag.length; i++) {
 					items[i] = document.getElementById(selectedTag[i]);
+				}
 			}
-			else
+			else {
 				items = Array.from(document.querySelectorAll(`[data-${dataKey}="${clickedButtonId}"]`));
+			}
 
 			infoText.innerHTML = "";
 			let buttonsDisplay = items.length > 1 ? 'block' : 'none';
 			prevButton.style.display = buttonsDisplay;
 			nextButton.style.display = buttonsDisplay;
 			if (items.length > 0) {
-				currentFilter === 'category' ? currentIndex = Math.floor(Math.random() * items.length) : currentIndex = 0
-				appendItem();
+				currentFilter === 'category' ? currentIndex = Math.floor(Math.random() * items.length) : currentIndex = 0;
+				appendItem(currentPage);
 				midColumn.style.display = "flex";
 			}
 		});
@@ -56,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			currentIndex = items.length - 1;
 		}
 		infoText.innerHTML = "";
-		appendItem();
+		appendItem(currentPage);
 	});
 	nextButton.addEventListener("click", function () {
 		if (items.length > 0 && currentIndex < items.length - 1) {
@@ -67,12 +70,15 @@ document.addEventListener("DOMContentLoaded", function () {
 			currentIndex = 0;
 		}
 		infoText.innerHTML = "";
-		appendItem();
+		appendItem(currentPage);
 	});
 
+	const homeImages = "./images/home/";
+	const newImages = "./images/new/";
 	const imagesCache = {};
 
-	function appendItem() {
+	function appendItem(currentPage) {
+
 		const selectedItem = items[currentIndex].cloneNode(true);
 		const id = selectedItem.getAttribute('id');
 		errors = 0;
@@ -83,7 +89,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		if (!imagesCache[id]) {
 			const img = new Image();
-			img.src = `images/${id}.png`;
+			img.src = (currentPage === 1 ? homeImages : newImages).concat(id, ".png");
+
 			img.classList.add('img-content');
 			img.style.display = 'none';
 
@@ -98,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			img.onerror = () => {
 				const imgJPG = new Image();
-				imgJPG.src = `images/${id}.jpg`;
+				imgJPG.src = (currentPage === 1 ? homeImages : newImages).concat(id, ".jpg");
 				imgJPG.classList.add('img-content');
 				imgJPG.style.display = 'none';
 
@@ -126,19 +133,16 @@ document.addEventListener("DOMContentLoaded", function () {
 		infoText.appendChild(selectedItem);
 	}
 });
-
-
 let TAGS = {};
-
 (function () {
-	function excelToJson() {
+	function excelToJson(filePath) {
 		return new Promise((resolve, reject) => {
 			const xhr = new XMLHttpRequest();
-			xhr.open('GET', './texts_fin.xlsx', true);
-			xhr.responseType = 'arraybuffer';
+			xhr.open("GET", filePath, true);
+			xhr.responseType = "arraybuffer";
 			xhr.onload = function (e) {
 				const data = new Uint8Array(xhr.response);
-				const workbook = XLSX.read(data, { type: 'array' });
+				const workbook = XLSX.read(data, { type: "array" });
 				const worksheet = workbook.Sheets[workbook.SheetNames[0]];
 				const json = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 				resolve(json);
@@ -150,65 +154,75 @@ let TAGS = {};
 		});
 	}
 
-
-	excelToJson().then((jsonData) => {
-		const items = document.getElementById('items');
-		jsonData.forEach((row) => {
-			const li = document.createElement('li');
-			li.id = row[0];
-			li.setAttribute('data-category', row[1]);
-			let content = '';
-			for (let i = 2; i < row.length; i++) {
-				content += `<p class="text-content">${row[i]}</p>`;
-			}
-			li.innerHTML = content;
-			items.appendChild(li);
-		});
-
-
-		return fetchTags();
-	}).then(tags => {
-		for (const tag of tags) {
-			const ids = tag.content[0].split(', ');
-			TAGS[tag.name] = ids;
-			continue;
-			for (const id of ids) {
-				const item = document.querySelector(`[id="${id}"]`);
-				if (item) {
-					item.setAttribute('data-tag', tag.name);
+	const currentPage = window.location.href.includes("new.html") ? 2 : 1;
+	const homeXlsx = "./texts_fin.xlsx";
+	const homeTxt = "./stich_finale.txt";
+	const newXlsx = "./texts_fin-new.xlsx";
+	const newTxt = "./stich_finale-new.txt";
+	const textDocumentPath = currentPage === 1 ? homeTxt : newTxt;
+	const xlsxDocumentPath = currentPage === 1 ? homeXlsx : newXlsx;
+	excelToJson(xlsxDocumentPath)
+		.then((jsonData) => {
+			const items = document.getElementById("items");
+			jsonData.forEach((row) => {
+				const li = document.createElement("li");
+				li.id = row[0];
+				li.setAttribute("data-category", row[1]);
+				let content = "";
+				for (let i = 2; i < row.length; i++) {
+					content += `<p class="text-content">${row[i]}</p>`;
+				}
+				li.innerHTML = content;
+				items.appendChild(li);
+			});
+			return fetchTags();
+		})
+		.then((tags) => {
+			for (const tag of tags) {
+				const ids = tag.content[0].split(", ");
+				TAGS[tag.name] = ids;
+				for (const id of ids) {
+					const item = document.getElementById(id);
+					if (item) {
+						item.setAttribute("data-tag", tag.name);
+					}
 				}
 			}
-		}
-	});
-
+		})
+		.catch((error) => {
+			console.log("Error loading texts_fin.xlsx:", error);
+		});
 	function fetchTags() {
 		return new Promise((resolve, reject) => {
-
-			fetch('./stich_finale.txt')
-				.then(response => response.text())
-				.then(text => {
-					const lines = text.split('\n');
-
+			fetch(textDocumentPath)
+				.then((response) => {
+					if (response.ok) {
+						console.log("stich_finale.txt loaded successfully");
+					} else {
+						console.log("Error loading stich_finale.txt:", response.status);
+					}
+					return response.text();
+				})
+				.then((text) => {
+					const lines = text.split("\n");
 					const arrayMap = new Map();
-
-					lines.forEach(line => {
-						const words = line.trim().split(' ');
+					lines.forEach((line) => {
+						const words = line.trim().split(" ");
 						const arrayName = String(words[0]).toLowerCase();
-						const arrayContent = words.slice(1).join(' ');
-
+						const arrayContent = words.slice(1).join(" ");
 						if (!arrayMap.has(arrayName)) {
 							arrayMap.set(arrayName, []);
 						}
-
 						arrayMap.get(arrayName).push(arrayContent);
 					});
-
-					const resultArray = Array.from(arrayMap, ([name, content]) => ({ name, content }));
-
+					const resultArray = Array.from(arrayMap, ([name, content]) => ({
+						name,
+						content,
+					}));
 					resolve(resultArray);
 				})
-				.catch(error => {
-					reject(error);
+				.catch((error) => {
+					console.log("Error loading stich_finale.txt:", error);
 				});
 		});
 	}
